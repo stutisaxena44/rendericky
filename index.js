@@ -1,19 +1,26 @@
-
 const express = require('express');
 const app = express();
 
 app.use(express.json());
 
-// GET method
 app.get('/', (req, res) => {
-    res.send('hi lol');
+    res.status(200).json({
+        message: 'Hello World from the GET route!'
+    });
 });
 
-// POST method
 app.post('/', (req, res) => {
-    res.send('hi lol');
+    const clientData = req.body;
+    res.status(201).json({
+        message: 'Hello World from the POST route!',
+        receivedData: clientData
+    });
 });
 
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
 app.listen(3000, () => {
     console.log('Server running at http://localhost:3000');
 });
